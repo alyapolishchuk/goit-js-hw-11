@@ -23,6 +23,7 @@ let searchOnInput = '';
 
 function onSubmit(event) {
   event.preventDefault();
+
   searchOnInput = event.target.searchQuery.value;
 
   wrapper.innerHTML = '';
@@ -32,17 +33,24 @@ function onSubmit(event) {
     Notiflix.Notify.failure('Please, search any picture!');
     return;
   }
+
+  page = 1;
+
   fetchImages(searchOnInput, page).then(response => {
     if (!response.data.total) {
       Notiflix.Notify.failure(
         'Sorry, there are no images matching your search query. Please try again.'
       );
       return;
+    } else if (response.data.hits.lengts <= 40) {
+      observer.unobserve(target);
     } else {
       createMarkup(response.data.hits);
       observer.observe(target);
     }
-    Notiflix.Notify.success(`Hooray! We found ${response.data.total} images.`);
+    Notiflix.Notify.success(
+      `Hooray! We found ${response.data.totalHits} images.`
+    );
   });
 }
 
@@ -88,10 +96,11 @@ function generateImages(entries) {
     if (entrie.isIntersecting) {
       page += 1;
       fetchImages(searchOnInput, page).then(response => {
-        if (response.data.hits.length === 0) {
+        if (response.data.totalHits < page * 40) {
           Notiflix.Notify.failure(
             `We're sorry, but you've reached the end of search results.`
           );
+          observer.unobserve(target);
           return;
         }
         createMarkup(response.data.hits);
