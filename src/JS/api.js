@@ -1,18 +1,17 @@
+import Notiflix from 'notiflix';
 import axios from 'axios';
 
-const BASE_URL = 'https://pixabay.com/api/';
-const API_KEY = '28351451-92068ca5a052609c75a292b60';
-
-export function fetchImages(q, page) {
-  const parametrs = new URLSearchParams({
-    key: API_KEY,
-    q,
-    image_type: 'photo',
-    orientation: 'horizontal',
-    safesearch: true,
-    page,
-  });
-  return fetch(`${BASE_URL}${parametrs}`).then(response => {
-    return response.json();
+export default function fetchImages(value, page) {
+  return axios({
+    url: `https://pixabay.com/api/`,
+    params: {
+      key: '28348938-0384dcc8789dbce7d9ed883a2',
+      q: value,
+      orientation: 'horizontal',
+      image_type: 'photo',
+      safesearch: true,
+      page: page,
+      per_page: 40,
+    },
   });
 }
