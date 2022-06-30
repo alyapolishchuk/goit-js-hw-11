@@ -1,11 +1,10 @@
-import Notiflix from 'notiflix';
 import axios from 'axios';
 
 export default function fetchImages(value, page) {
   return axios({
     url: `https://pixabay.com/api/`,
     params: {
-      key: '28348938-0384dcc8789dbce7d9ed883a2',
+      key: '28351451-92068ca5a052609c75a292b60',
       q: value,
       orientation: 'horizontal',
       image_type: 'photo',
