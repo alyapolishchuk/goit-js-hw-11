@@ -32,6 +32,8 @@ function onSubmit(event) {
     return;
   }
 
+  page = 1;
+  
   fetchImages(searchOnInput, page).then(response => {
     if (!response.data.total) {
       Notiflix.Notify.failure(
