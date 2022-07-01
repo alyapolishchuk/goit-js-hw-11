@@ -7,19 +7,17 @@ const form = document.querySelector('.search-form');
 const wrapper = document.querySelector('.gallery');
 const target = document.querySelector('.target-guard');
 
-// --------------------------------------------------------- //
 const options = {
   root: null,
   rootMargin: '400px',
   threshold: 1.0,
 };
-const observer = new IntersectionObserver(generateImages, options);
+const observer = new IntersectionObserver(getImages, options);
 
 form.addEventListener('submit', onSubmit);
 
 let page = 1;
 let searchOnInput = '';
-// --------------------------------------------------------- //
 
 function onSubmit(event) {
   event.preventDefault();
@@ -33,8 +31,6 @@ function onSubmit(event) {
     Notiflix.Notify.failure('Please, search any picture!');
     return;
   }
-
-  page = 1;
 
   fetchImages(searchOnInput, page).then(response => {
     if (!response.data.total) {
@@ -54,27 +50,25 @@ function onSubmit(event) {
   });
 }
 
-// --------------------------------------------------------- //
-
-function createMarkup(arr) {
-  const imageList = arr
+function createMarkup(array) {
+  const imgList = array
     .map(item => {
       return `
     <div class="photo-card"> 
       <a href="${item.largeImageURL}">
         <img  src="${item.webformatURL}" alt="${item.tags}" loading="lazy" />
       </a>
-      <div class="info">
-        <p class="info-item">
+      <div class="information">
+        <p class="descritions">
           <b>Likes: ${item.likes}</b>
         </p>
-        <p class="info-item">
+        <p class="descritions">
           <b>Views: ${item.views}</b>
         </p>
-        <p class="info-item">
+        <p class="descritions">
           <b>Comments: ${item.comments}</b>
         </p>
-        <p class="info-item">
+        <p class="descritions">
           <b>Downloads: ${item.downloads}</b>
         </p>
       </div>
@@ -82,16 +76,14 @@ function createMarkup(arr) {
     })
     .join('');
 
-  wrapper.insertAdjacentHTML('beforeend', imageList);
+  wrapper.insertAdjacentHTML('beforeend', imgList);
 
   const lightbox = new SimpleLightbox('.gallery a', {
     /* options */
   });
 }
 
-// --------------------------------------------------------- //
-
-function generateImages(entries) {
+function getImages(entries) {
   entries.forEach(entrie => {
     if (entrie.isIntersecting) {
       page += 1;

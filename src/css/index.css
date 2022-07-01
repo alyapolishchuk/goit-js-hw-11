@@ -11,17 +11,13 @@ a {
 img {
   display: block;
   width: 100%;
-
   object-fit: cover;
 }
 
 .gallery {
-  /* justify-content: space-around; */
-  /* padding: 15px; */
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  /* margin-bottom: 15px; */
   gap: 20px;
 }
 
@@ -29,44 +25,26 @@ img {
   width: calc((100% / 4)- 40px);
   position: relative;
   background-color: rgba(180, 96, 197, 0.608);
-
   border-radius: 5px;
-
   overflow: hidden;
-
   transition: 0.3s;
 }
-
-/* .photo-card::after {
-  content: '';
-  position: absolute;
-  z-index: 2;
-  left: 0;
-  top: 0;
-  background-color: rgba(0, 0, 0, 0.235);
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  transition: 0.2s;
-} */
 
 .photo-card:hover {
   transform: scale(1.09);
   font-size: 20px;
 }
 
-.info {
+.information {
   display: flex;
   padding-left: 15px;
   padding-right: 15px;
   vertical-align: bottom;
   justify-content: space-between;
-  /* color: rgba(255, 242, 0, 0.889); */
-  /* color: rgba(255, 251, 0, 0.889); */
   color: aliceblue;
 }
 
-.info-item:not(:last-child) {
+.descritions:not(:last-child) {
   margin-right: 10px;
 }
 
@@ -80,9 +58,8 @@ input {
   height: 50px;
   font-size: 30px;
   outline: none;
-  border: 5px double navy;
+  border: 1px solid navy;
   border-radius: 30px;
-  /* color: darkblue; */
   background-color: rgba(25, 25, 232, 0.337);
   margin-bottom: 20px;
   padding-left: 20px;
@@ -91,7 +68,7 @@ input {
 }
 
 button {
-  height: 60px;
+  height: 55px;
   width: 90px;
   margin-left: 20px;
   vertical-align: center;
